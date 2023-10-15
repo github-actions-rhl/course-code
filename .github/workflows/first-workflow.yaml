@@ -3,7 +3,7 @@ on: [push]
 
 jobs: 
     run-jobs:
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-latest `
         steps:
             - name: echo a string
               run: echo "Hello World"
@@ -11,3 +11,20 @@ jobs:
               run: |
                 python -v
                 node -v
+    
+    
+    parallel-job-macos:
+        runs-on: macos-latest
+        steps:
+            - name: View software version
+              run: sw_vers
+    
+    dependant-job:
+        runs-on: windows-latest
+        needs: run-jobs
+        steps:
+            - name: echo a string
+              run: Write-Output "Windows String"
+            - name: Error Step
+              run: doesnotexist  
+              
