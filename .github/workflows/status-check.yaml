@@ -27,7 +27,7 @@ jobs:
     
     Job-2:
         runs-on: Ubuntu-latest
-        step:
+        steps:
             - name: Step 1
-            if: success()
-            run: echo "Job-1 successfully ran!"
+              if: success()
+              run: echo "Job-1 successfully ran!"
