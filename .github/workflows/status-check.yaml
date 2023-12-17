@@ -1,0 +1,33 @@
+name: Status Check
+on: [push]
+run-name: "Status Check by @${{ github.actor }} on ${{ github.event_name }} event"
+
+
+jobs:
+    Job-1:
+        runs-on: Ubuntu-latest
+        steps:
+            - name: Step 1
+              run: sleep 20
+            - name: Step 2
+              id: step-2
+              run: exit 1
+            - name: Step 3
+              if: failure() && steps.step-2.conclusion == 'failure'
+              run: echo "Step 2 has failed"
+            - name: Step 4
+              if: success()
+              run: echo "Success"
+            - name: always run
+              if: always()
+              run: echo "always runs"
+            - name: cancelled
+              if: cancelled()
+              run: echo "Cancelled"
+    
+    Job-2:
+        runs-on: Ubuntu-latest
+        step:
+            - name: Step 1
+            if: success()
+            run: echo "Job-1 successfully ran!"
