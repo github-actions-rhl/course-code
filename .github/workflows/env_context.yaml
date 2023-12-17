@@ -19,7 +19,7 @@ jobs:
             -   name: print ref
                 run: echo $GITHUB_REF
             -   name: Log ENV VAR
-                run: echo WF_LEVEL_ENV
+                run: echo $WF_LEVEL_ENV
             -   name: Log Context Variable
                 run: echo ${{ github.ref }}
             -   name: Log Custom ENV Vars
@@ -27,9 +27,9 @@ jobs:
                     STEP_LEVEL_ENV: just for this step
                     WF_LEVEL_ENV: Override the workflow ENV
                 run: |
-                    echo STEP_LEVEL_ENV
-                    echo STEP_LEVEL_ENV
-                    echo WF_LEVEL_ENV
+                    echo $STEP_LEVEL_ENV
+                    echo $STEP_LEVEL_ENV
+                    echo $WF_LEVEL_ENV
 
 
 
