@@ -1,0 +1,23 @@
+name: Expressions & Contexts
+on: [push, pull_request]
+run-name: "Expressions & Contexts by @${{ github.actor }} by ${{ github.event_name }}"
+
+jobs: 
+    using-expressions-and-contexts:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Expressions
+              id: expressions
+              run: 
+                  echo ${{ 1 }}
+                  echo ${{ true }}
+                  echo ${{ 'This is a string' }}
+                  echo ${{ true && false }}
+                  echo ${{ true || (true && false) }}
+            
+            - name: Dump Contexts
+              run: 
+                echo ${{ toJson(github) }}
+                echo ${{ toJson(github) }}
+                echo ${{ toJson(secrets) }}
+                echo ${{ toJson(steps) }}
