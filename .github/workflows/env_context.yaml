@@ -1,0 +1,35 @@
+name: Environment and Context Variables
+on: [push]
+run-name: "Test environment and context by @${{ github.actor }} on ${{ github.event_name }}"
+
+env:
+    WF_LEVEL_ENV: Available for all the jobs
+
+jobs:
+    env_context:
+        runs-on: ubuntu-latest
+        # if: $GITHUB_REF == 'refs/head/main'  
+        # DONT DO THE ABOVE BCS THIS IS COMPUTED IN RUNNER MACHINE. HENCE CANNOT USE IT IN IF STATEMENTS.
+        # THE CONTEXT VARIABLES ARE COMPUTED BY GITHUB ACTIONS BEFORE SENDING TO THE RUNNER MACHINE.
+        env: 
+            STEP_LEVEL_ENV: Available to all steps in the job
+        
+        if: github.ref == 'refs/head/main'
+        steps:
+            -   name: Log ENV VAR
+                run: echo $GITHUB_REF
+            -   name: Log Context Variable
+                run: echo ${{ github.ref }}
+            -   name: Log Custom ENV Vars
+                env:
+                    STEP_LEVEL_ENV: just for this step
+                    WF_LEVEL_ENV: Override the workflow ENV
+                run: |
+                    echo STEP_LEVEL_ENV
+                    echo STEP_LEVEL_ENV
+                    echo WF_LEVEL_ENV
+
+
+
+
+
