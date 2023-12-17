@@ -1,5 +1,7 @@
 name: First Workflow
 on: [push]
+run-name: "First Workflow by @${{ github.actor }} by ${{ github.event_name }}"
+
 
 jobs: 
     run-jobs:
